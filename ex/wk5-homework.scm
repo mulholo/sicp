@@ -268,3 +268,19 @@
 (fold-left list nil (list 1 2 3))
 
 ; commutative
+
+;; ex 2.54
+(define (equal? seq-a seq-b)
+  (cond ((and (empty? seq-a) (empty? seq-b)) #t)
+        ((not (= (length seq-a) (length seq-b))) #f)
+        (else (and (eq? (car seq-a) (car seq-b))
+                   (equal? (cdr seq-a) (cdr seq-b))))))
+
+
+; test equal?
+(equal? '() '())
+(equal? '(a) '(a))
+(equal? '(this is a list) '(this is a list))
+(equal? '(this is a list) '(this is a))
+(equal? '(a) '(b))
+
