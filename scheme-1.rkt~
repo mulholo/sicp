@@ -68,10 +68,6 @@
 	 (if (eval-1 (cadr exp))
 	     (eval-1 (caddr exp))
 	     (eval-1 (cadddr exp))))
-        ((and? exp)
-         (if (not (eval-1 (cadr exp)))  ; if first arg to and is false
-             #f                         ; return immediately
-             (eval-1 (caddr exp))))     ; without evaluating second arg
 	((lambda-exp? exp) exp)
 	((pair? exp) (apply-1 (eval-1 (car exp))      ; eval the operator
 			      (map eval-1 (cdr exp))))
@@ -117,7 +113,7 @@
 (define quote-exp? (exp-checker 'quote))
 (define if-exp? (exp-checker 'if))
 (define lambda-exp? (exp-checker 'lambda))
-(define and? (exp-checker 'and))
+
 
 ;; SUBSTITUTE substitutes actual arguments for *free* references to the
 ;; corresponding formal parameters.  For example, given the expression
